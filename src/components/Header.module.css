@@ -1,0 +1,37 @@
+.container{
+    padding: 50px 30px;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 30px;
+    background-color: rgb(218, 255, 255);
+    min-height: 80vh;
+
+}
+.container .heading{
+    max-width: 500px;
+    letter-spacing: 6px;
+    margin: 0 auto;
+    color: black;
+    font-size: 3.1rem;
+    font-weight: bolder;
+}
+.heading span{
+    background-clip: text;
+    color: rgb(0, 186, 186);
+}
+.right img{
+    width: 400px;
+    max-width: 400px;
+
+}
+
+.container .aname{
+    font-size: 3.3rem;
+    font-weight: bolder;
+    align-items:center ;
+    color: black;
+    text-align: center;
+}
