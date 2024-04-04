@@ -9,16 +9,18 @@
 }
 .header{
     display: flex;
-    gap: 10px;
+    gap: 30px;
     overflow-x: auto;
     border-bottom: 1px solid  rgba(0, 0, 0, 0.12);
+    font-size: 1.1rem;
     cursor: pointer;
+    font-weight: bold;
 }
 .header .section{
-    padding: 10px;
+    padding: 20px;
     border-bottom: 2px solid;
-    font-weight: 500;
-    font-size: 1rem;
+    font-weight: 550;
+    font-size: 2rem;
     white-space: nowrap;
     
 }
@@ -102,4 +104,13 @@
   }
   .body button:active{
     transform: translateY(2px);
+  }
+  .templateImages img{
+    height: 150px;
+    width: 150px;
+    padding: 10px;
+  }
+  .body button:hover{
+    background-color: black;
+    color: rgb(63, 176, 176);
   }

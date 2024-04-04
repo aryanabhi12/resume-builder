@@ -5,8 +5,14 @@ import {ArrowDown} from 'react-feather'
 import Editor from './Editor';
 import { useState } from 'react';
 import Resume from './Resume';
+import Resume2 from './Resume2';
+// import SecondResume from './SecondResume.js';
+import SecondResume from './SecondResume.js';
+import ThirdResume from './ThirdResume.js';
+import FourthResume from './FourthResume.js';
+
 const Bodyp = () => {
-  const colors=["#239ce2", "#48bb78", "rgb(63, 176, 176)","#a0aec0","#ed8936"];
+  
   const sections={
     basicInfo: "Basic info",
     workExp: "Work Experience",
@@ -14,11 +20,10 @@ const Bodyp = () => {
     education: "Education",
     achievements: "Achievements",
     summary: "Summary",
-    others: "Others"
+    others: "Others",
   }
   const resumeRef = useRef();
 
-  const [activeColor, setActiveColor] = useState(colors[0]);
   const [resumeInformation, setResumeInformation] = useState({
     [sections.basicInfo]: {
       id: sections.basicInfo,
@@ -55,6 +60,11 @@ const Bodyp = () => {
       sectionTitle: sections.others,
       detail: "",
     },
+    [sections.Template]: {
+      id: sections.Template,
+      sectionTitle: sections.Template,
+      Templateno: "",
+    },
   });
 
   useEffect(()=>
@@ -67,27 +77,8 @@ const Bodyp = () => {
     <div className={styles.container}>
       <p className={styles.heading}>Resume builder</p>
       <div className={styles.toolbar}>
-        <div className={styles.colors}>
-          {colors.map((item)=>(
-            <span
-               key={item}
-               style={{backgroundColor: item}}
-               className={`${styles.color} ${
-                activeColor === item ? styles.active : ""
-              }`}
-              onClick={() => setActiveColor(item)}/>
-          ))}
-          </div>
-          <ReactToPrint
-          trigger={() => {
-            return (
-              <button>
-                Download <ArrowDown />
-              </button>
-            );
-          }}
-          content={() => resumeRef.current}
-        />
+        
+  
         </div>
       <div className={styles.main}>
         <Editor sections={sections} information={resumeInformation} setInformation={setResumeInformation}/>
@@ -95,9 +86,31 @@ const Bodyp = () => {
             ref={resumeRef}
             sections={sections}
             information={resumeInformation}
-            activeColor={activeColor}
+            
                     
         />
+        <SecondResume 
+          ref={resumeRef}
+          sections={sections}
+          information={resumeInformation}
+          
+        />
+        <ThirdResume 
+        ref={resumeRef}
+        sections={sections}
+        information={resumeInformation}
+        />
+        <FourthResume
+        ref={resumeRef}
+        sections={sections}
+        information={resumeInformation}
+        />
+        {/* <Resume2
+            ref={resumeRef}
+            sections={sections}
+            information={resumeInformation}
+            activeColor={activeColor}
+        /> */}
       </div>
     </div>
   )

@@ -2,6 +2,24 @@ import React, { useEffect, useState } from 'react'
 import styles from './Editor.module.css'
 import InputControl from './InputControls';
 import { X } from 'react-feather';
+
+// Import useState and useEffect if not already imported
+
+// Import your InputControl component and other necessary dependencies
+
+
+  // Your existing code...
+
+  
+
+
+
+
+
+
+
+
+
 const Editor = (props) => {
         const information=props.information;   
         const sections=props.sections;
@@ -26,7 +44,63 @@ const Editor = (props) => {
           setValues(tempValues);
         };
 
+        // Define state variables for email and phone validation
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPhoneValid, setIsPhoneValid] = useState(true);
 
+  // Validation function for email
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Validation function for phone number
+  // Validation function for phone number
+const validatePhone = (phone) => {
+  // Basic phone number validation: Only digits allowed and length must be 10
+  const phoneRegex = /^\d{10}$/;
+  return phoneRegex.test(phone);
+};
+
+// Handle phone input change
+const handlePhoneChange = (event) => {
+  let phone = event.target.value;
+  
+  // Remove any non-digit characters from the input
+  phone = phone.replace(/\D/g, '');
+
+  // Limit the phone number to 10 digits
+  phone = phone.slice(0, 10);
+
+  setValues((prev) => ({ ...prev, phone }));
+
+  // Validate phone number
+  setIsPhoneValid(validatePhone(phone));
+};
+
+
+  // Handle email input change
+  const handleEmailChange = (event) => {
+    const email = event.target.value;
+    setValues((prev) => ({ ...prev, email }));
+
+    // Validate email
+    setIsEmailValid(validateEmail(email));
+  };
+
+  // Handle phone input change
+  
+
+        // const TemplateBody=(
+        //   <div className={styles.templates}>
+        //   <h2>Choose a Template:</h2>
+        //   <div className={styles.templateImages}>
+        //    <button> <img src={Template1Image} alt="Template 1" /></button>
+        //    <button> <img src={Template2Image} alt="Template 2" /></button>
+        //     {/* Add more images for other templates */}
+        //   </div>
+        // </div>
+        // );
 
         const workExpBody = (
             <div className={styles.detail}>
@@ -73,7 +147,7 @@ const Editor = (props) => {
           <div className={styles.row}>
         <InputControl
           label="Start Date"
-          type="date"
+          type="month"
           placeholder="Enter start date of work"
           value={values.startDate}
           onChange={(event) =>
@@ -82,7 +156,7 @@ const Editor = (props) => {
           />
           <InputControl
           label="End Date"
-          type="date"
+          type="month"
           placeholder="Enter end date of work"
           value={values.endDate}
           onChange={(event) =>
@@ -187,7 +261,7 @@ const projectBody = (
         <div className={styles.row}>
         <InputControl
           label="Start Date"
-          type="date"
+          type="month"
           value={values.startDate}
           placeholder="Enter start date of this education"
           onChange={(event) =>
@@ -195,7 +269,7 @@ const projectBody = (
           }/>
           <InputControl
           label="End Date"
-          type="date"
+          type="month"
           value={values.endDate}
           placeholder="Enter end date of this education"
           onChange={(event) =>
@@ -238,20 +312,20 @@ const projectBody = (
           }/>
           </div>
           <div className={styles.row}>
-        <InputControl
-          label="Email"
-          value={values.email}
-          placeholder="Enter your email"
-          onChange={(event) =>
-            setValues((prev) => ({ ...prev, email: event.target.value }))
-          }/>
           <InputControl
-          label="Enter phone"
-          value={values.phone}
-          placeholder="Enter your phone number"
-          onChange={(event) =>
-            setValues((prev) => ({ ...prev, phone: event.target.value }))
-          }/>
+        label="Email"
+        value={values.email}
+        placeholder="Enter your email"
+        onChange={handleEmailChange}
+      />
+      {!isEmailValid && <p style={{ color: 'red' }}>Please enter a valid email address.</p>}
+      <InputControl
+        label="Enter phone"
+        value={values.phone}
+        placeholder="Enter your phone number"
+        onChange={handlePhoneChange}
+      />
+      {!isPhoneValid && <p style={{ color: 'red' }}>Please enter a valid phone number.</p>}
           </div></div>
           )      
           const achievementsBody = (
@@ -314,6 +388,7 @@ const projectBody = (
                         return summaryBody;
                       case sections.others:
                         return otherBody;
+                     
                       default:
                         return null;
                     }
@@ -407,13 +482,13 @@ const projectBody = (
                         }));
                         break;
                       }
-                      case sections.achievement: {
+                      case sections.achievements: {
                         const tempPoints = values.points;
                 
                         props.setInformation((prev) => ({
                           ...prev,
-                          [sections.achievement]: {
-                            ...prev[sections.achievement],
+                          [sections.achievements]: {
+                            ...prev[sections.achievements],
                             points: tempPoints,
                             sectionTitle,
                           },

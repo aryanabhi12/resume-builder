@@ -12,7 +12,7 @@ const Header = () => {
       </div>
      
       <div className={styles.right}>
-      <h1 className={styles.aname}>The resume</h1>
+      <h1 className={styles.aname}>Visual<span>CV</span></h1>
         <img src={resumeSvg} alt="Resume" />
       </div>
     </div>
